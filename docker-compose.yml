@@ -28,6 +28,8 @@ services:
     image: mariadb:10.6
     restart: unless-stopped
     tty: true
+    volumes:
+    - db_data:/var/lib/mysql
     ports:
       - "3306:3306"
     environment:
@@ -115,3 +117,19 @@ services:
       - ./src:/var/www/html
     networks:
       - l10_network
+
+  phpmyadmin:
+    container_name: l10-phpmyadmin
+    image: phpmyadmin
+    depends_on:
+      - mysql
+    environment:
+      - PMA_HOST=mysql
+    ports:
+      - 8081:80
+    networks:
+      - l10_network
+
+volumes:
+  db_data:
+    driver: local

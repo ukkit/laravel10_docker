@@ -1,6 +1,7 @@
 # Laravel 10 Docker
 
 ### Docker + Laravel 10 running:
+
 - php:8.1.18-fpm-alpine
 - nginx:stable-alpine
 - mariadb:10.6
@@ -9,6 +10,7 @@
 - node:current-alpine
 
 ### Seperate containers for:
+
 - app
 - mysql/mariadb
 - php
@@ -17,8 +19,10 @@
 - npm
 - artisan
 - cron
+- phpmyadmin (on port 8081)
 
 ### Laravel packages pre-installed:
+
 - askedio/laravel-soft-cascade
 - doctrine/dbal
 - guzzlehttp/guzzle
@@ -39,7 +43,6 @@
 
 > docker-compose run --rm artisan migrate
 
+Based on [aschmelyun/docker-compose-laravel][link1]
 
-Based on [aschmelyun/docker-compose-laravel][LINK1]
-
-[LINK1]: https://github.com/aschmelyun/docker-compose-laravel
+[link1]: https://github.com/aschmelyun/docker-compose-laravel
