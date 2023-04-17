@@ -1,0 +1,117 @@
+version: '3'
+
+networks:
+  l10_network:
+
+services:
+  app:
+    container_name: l10-app
+    build:
+      context: ./dockerfiles
+      dockerfile: nginx.dockerfile
+      args:
+        - UID=${UID:-1000}
+        - GID=${GID:-1000}
+    ports:
+      - "80:80"
+    volumes:
+      - ./src:/var/www/html:delegated
+    depends_on:
+      - php
+      - artisan
+      - mysql
+    networks:
+      - l10_network
+
+  mysql:
+    container_name: l10-mysql
+    image: mariadb:10.6
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: foundation
+      MYSQL_USER: seldon
+      MYSQL_PASSWORD: trantor
+      MYSQL_ROOT_PASSWORD: psychohistory
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - l10_network
+
+  php:
+    container_name: l10-php
+    build:
+      context: ./dockerfiles
+      dockerfile: php.dockerfile
+      args:
+        - UID=${UID:-1000}
+        - GID=${GID:-1000}
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./src:/var/www/html:delegated
+    networks:
+      - l10_network
+
+  redis:
+    container_name: l10-redis
+    image: redis:alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - l10_network
+
+  composer:
+    image: composer:latest
+    container_name: l10-composer
+    volumes:
+      - ./src:/var/www/html
+    working_dir: /var/www/html
+    depends_on:
+      - app
+    entrypoint: [ 'composer', '--ignore-platform-reqs' ]
+    networks:
+      - l10_network
+
+  npm:
+    image: node:current-alpine
+    container_name: l10-npm
+    volumes:
+      - ./src:/var/www/html
+    ports:
+      - "3000:3000"
+      - "3001:3001"
+      - "5173:5173"
+    working_dir: /var/www/html
+    entrypoint: [ 'npm' ]
+    networks:
+      - l10_network
+
+  artisan:
+    container_name: l10-artisan
+    build:
+      context: ./dockerfiles
+      dockerfile: php.dockerfile
+      args:
+        - UID=${UID:-1000}
+        - GID=${GID:-1000}
+    volumes:
+      - ./src:/var/www/html:delegated
+    depends_on:
+      - mysql
+    entrypoint: [ 'php', '/var/www/html/artisan' ]
+    networks:
+      - l10_network
+
+  cron:
+    container_name: l10-cron
+    build:
+      context: ./dockerfiles
+      dockerfile: cron.dockefile
+    volumes:
+      - ./src:/var/www/html
+    networks:
+      - l10_network
