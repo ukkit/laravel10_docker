@@ -1,6 +1,8 @@
-# Laravel 10 Docker
+# Laravel Docker
 
-### Docker + Laravel 10 running:
+Docker environment for Laravel 10 (using official docker hub repositories).
+
+### Components:
 
 - php:8.1.18-fpm-alpine
 - nginx:stable-alpine
@@ -8,6 +10,7 @@
 - redis:alpine
 - composer:latest
 - node:current-alpine
+- phpmyadmin:latest
 
 ### Seperate containers for:
 
