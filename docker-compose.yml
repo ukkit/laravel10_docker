@@ -118,6 +118,16 @@ services:
     networks:
       - 11Aug_network
 
+  # python:
+  #   container_name: 11Aug-python
+  #   build:
+  #     context: ./dockerfiles
+  #     dockerfile: python.dockerfile
+  #   volumes:
+  #     - ./src:/var/www/html
+  #   networks:
+  #     - 11Aug_network
+
   phpmyadmin:
     container_name: 11Aug-phpmyadmin
     image: phpmyadmin

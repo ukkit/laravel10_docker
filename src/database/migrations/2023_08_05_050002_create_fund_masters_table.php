@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('fund_table_name');
             $table->string('isin_code');
             $table->string('yfin_code');
+            $table->string('amfii_code');
             $table->timestamps();
             $table->softDeletes();
 

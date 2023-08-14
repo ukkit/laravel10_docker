@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fund_details', function (Blueprint $table) {
+        Schema::create('icra_ratings', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('fund_masters_id');
-            
+            $table->string('icra_ratings');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('fund_masters_id')->references('id')->on('fund_masters');
         });
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fund_details');
+        Schema::dropIfExists('icra_ratings');
     }
 };

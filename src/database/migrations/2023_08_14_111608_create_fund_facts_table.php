@@ -11,15 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fund_expense_ratios', function (Blueprint $table) {
+        Schema::create('fund_facts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('fund_masters_id');
-            $table->float('regular_plan_base_ter', 2, 2); //in percentage
-            $table->float('regular_plan_additonal_expense', 2, 2)->default('0');
-            $table->float('regular_plan_gst', 2, 2); //in percentage
-            $table->float('direct_plan_base_ter', 2, 2); //in percentage
-            $table->float('direct_plan_additonal_expense', 2, 2)->default('0');
-            $table->float('direct_plan_gst', 2, 2); //in percentage
+            $table->text('investment_objective');
+            $table->date('inception_date');
+            $table->string('fund_managers');
+            $table->integer('fund_size');
+            $table->float('turnover_ratio', 3, 3);
+            $table->float('entry_load', 2, 2);
+            $table->float('exit_load', 2, 2);
+            $table->string('benchmark_index_1');
+            $table->string('benchmark_index_2')->nullable();
+            $table->string('benchmark_index_3')->nullable();
 
             $table->timestamps();
             $table->softDeletes();
@@ -33,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fund_expense_ratios');
+        Schema::dropIfExists('fund_facts');
     }
 };
