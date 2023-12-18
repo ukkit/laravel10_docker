@@ -2,11 +2,19 @@ version: '3'
 
 networks:
 <<<<<<< HEAD
+<<<<<<< HEAD
   L10D_network:
 
 services:
   app:
     container_name: L10D-app
+=======
+  11Aug_network:
+
+services:
+  app:
+    container_name: 11Aug-app
+>>>>>>> 034ea41fb4f7f090b5ab1428a50bc5c2e6068130
 =======
   11Aug_network:
 
@@ -30,10 +38,17 @@ services:
       - mysql
     networks:
 <<<<<<< HEAD
+<<<<<<< HEAD
       - L10D_network
 
   mysql:
     container_name: L10D-mysql
+=======
+      - 11Aug_network
+
+  mysql:
+    container_name: 11Aug-mysql
+>>>>>>> 034ea41fb4f7f090b5ab1428a50bc5c2e6068130
 =======
       - 11Aug_network
 
@@ -56,10 +71,17 @@ services:
       SERVICE_NAME: mysql
     networks:
 <<<<<<< HEAD
+<<<<<<< HEAD
       - L10D_network
 
   php:
     container_name: L10D-php
+=======
+      - 11Aug_network
+
+  php:
+    container_name: 11Aug-php
+>>>>>>> 034ea41fb4f7f090b5ab1428a50bc5c2e6068130
 =======
       - 11Aug_network
 
@@ -78,10 +100,17 @@ services:
       - ./src:/var/www/html:delegated
     networks:
 <<<<<<< HEAD
+<<<<<<< HEAD
       - L10D_network
 
   redis:
     container_name: L10D-redis
+=======
+      - 11Aug_network
+
+  redis:
+    container_name: 11Aug-redis
+>>>>>>> 034ea41fb4f7f090b5ab1428a50bc5c2e6068130
 =======
       - 11Aug_network
 
@@ -94,11 +123,19 @@ services:
       - '6379:6379'
     networks:
 <<<<<<< HEAD
+<<<<<<< HEAD
       - L10D_network
 
   composer:
     image: composer:latest
     container_name: L10D-composer
+=======
+      - 11Aug_network
+
+  composer:
+    image: composer:latest
+    container_name: 11Aug-composer
+>>>>>>> 034ea41fb4f7f090b5ab1428a50bc5c2e6068130
 =======
       - 11Aug_network
 
@@ -114,11 +151,19 @@ services:
     entrypoint: ['composer', '--ignore-platform-reqs']
     networks:
 <<<<<<< HEAD
+<<<<<<< HEAD
       - L10D_network
 
   npm:
     image: node:current-alpine
     container_name: L10D-npm
+=======
+      - 11Aug_network
+
+  npm:
+    image: node:current-alpine
+    container_name: 11Aug-npm
+>>>>>>> 034ea41fb4f7f090b5ab1428a50bc5c2e6068130
 =======
       - 11Aug_network
 
@@ -136,10 +181,17 @@ services:
     entrypoint: ['npm']
     networks:
 <<<<<<< HEAD
+<<<<<<< HEAD
       - L10D_network
 
   artisan:
     container_name: L10D-artisan
+=======
+      - 11Aug_network
+
+  artisan:
+    container_name: 11Aug-artisan
+>>>>>>> 034ea41fb4f7f090b5ab1428a50bc5c2e6068130
 =======
       - 11Aug_network
 
@@ -159,10 +211,17 @@ services:
     entrypoint: ['php', '/var/www/html/artisan']
     networks:
 <<<<<<< HEAD
+<<<<<<< HEAD
       - L10D_network
 
   cron:
     container_name: L10D-cron
+=======
+      - 11Aug_network
+
+  cron:
+    container_name: 11Aug-cron
+>>>>>>> 034ea41fb4f7f090b5ab1428a50bc5c2e6068130
 =======
       - 11Aug_network
 
@@ -176,15 +235,21 @@ services:
       - ./src:/var/www/html
     networks:
 <<<<<<< HEAD
+<<<<<<< HEAD
       - L10D_network
 
   # python:
   #   container_name: L10D-python
 =======
+=======
+>>>>>>> 034ea41fb4f7f090b5ab1428a50bc5c2e6068130
       - 11Aug_network
 
   # python:
   #   container_name: 11Aug-python
+<<<<<<< HEAD
+>>>>>>> 034ea41fb4f7f090b5ab1428a50bc5c2e6068130
+=======
 >>>>>>> 034ea41fb4f7f090b5ab1428a50bc5c2e6068130
   #   build:
   #     context: ./dockerfiles
@@ -193,10 +258,17 @@ services:
   #     - ./src:/var/www/html
   #   networks:
 <<<<<<< HEAD
+<<<<<<< HEAD
   #     - L10D_network
 
   phpmyadmin:
     container_name: L10D-phpmyadmin
+=======
+  #     - 11Aug_network
+
+  phpmyadmin:
+    container_name: 11Aug-phpmyadmin
+>>>>>>> 034ea41fb4f7f090b5ab1428a50bc5c2e6068130
 =======
   #     - 11Aug_network
 
@@ -212,7 +284,11 @@ services:
       - 8081:80
     networks:
 <<<<<<< HEAD
+<<<<<<< HEAD
       - L10D_network
+=======
+      - 11Aug_network
+>>>>>>> 034ea41fb4f7f090b5ab1428a50bc5c2e6068130
 =======
       - 11Aug_network
 >>>>>>> 034ea41fb4f7f090b5ab1428a50bc5c2e6068130
