@@ -1,11 +1,19 @@
 version: '3'
 
 networks:
+<<<<<<< HEAD
   L10D_network:
 
 services:
   app:
     container_name: L10D-app
+=======
+  11Aug_network:
+
+services:
+  app:
+    container_name: 11Aug-app
+>>>>>>> 034ea41fb4f7f090b5ab1428a50bc5c2e6068130
     build:
       context: ./dockerfiles
       dockerfile: nginx.dockerfile
@@ -21,10 +29,17 @@ services:
       - artisan
       - mysql
     networks:
+<<<<<<< HEAD
       - L10D_network
 
   mysql:
     container_name: L10D-mysql
+=======
+      - 11Aug_network
+
+  mysql:
+    container_name: 11Aug-mysql
+>>>>>>> 034ea41fb4f7f090b5ab1428a50bc5c2e6068130
     image: mariadb:10.6
     restart: unless-stopped
     tty: true
@@ -40,10 +55,17 @@ services:
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     networks:
+<<<<<<< HEAD
       - L10D_network
 
   php:
     container_name: L10D-php
+=======
+      - 11Aug_network
+
+  php:
+    container_name: 11Aug-php
+>>>>>>> 034ea41fb4f7f090b5ab1428a50bc5c2e6068130
     build:
       context: ./dockerfiles
       dockerfile: php.dockerfile
@@ -55,20 +77,35 @@ services:
     volumes:
       - ./src:/var/www/html:delegated
     networks:
+<<<<<<< HEAD
       - L10D_network
 
   redis:
     container_name: L10D-redis
+=======
+      - 11Aug_network
+
+  redis:
+    container_name: 11Aug-redis
+>>>>>>> 034ea41fb4f7f090b5ab1428a50bc5c2e6068130
     image: redis:alpine
     restart: unless-stopped
     ports:
       - '6379:6379'
     networks:
+<<<<<<< HEAD
       - L10D_network
 
   composer:
     image: composer:latest
     container_name: L10D-composer
+=======
+      - 11Aug_network
+
+  composer:
+    image: composer:latest
+    container_name: 11Aug-composer
+>>>>>>> 034ea41fb4f7f090b5ab1428a50bc5c2e6068130
     volumes:
       - ./src:/var/www/html
     working_dir: /var/www/html
@@ -76,11 +113,19 @@ services:
       - app
     entrypoint: ['composer', '--ignore-platform-reqs']
     networks:
+<<<<<<< HEAD
       - L10D_network
 
   npm:
     image: node:current-alpine
     container_name: L10D-npm
+=======
+      - 11Aug_network
+
+  npm:
+    image: node:current-alpine
+    container_name: 11Aug-npm
+>>>>>>> 034ea41fb4f7f090b5ab1428a50bc5c2e6068130
     volumes:
       - ./src:/var/www/html
     ports:
@@ -90,10 +135,17 @@ services:
     working_dir: /var/www/html
     entrypoint: ['npm']
     networks:
+<<<<<<< HEAD
       - L10D_network
 
   artisan:
     container_name: L10D-artisan
+=======
+      - 11Aug_network
+
+  artisan:
+    container_name: 11Aug-artisan
+>>>>>>> 034ea41fb4f7f090b5ab1428a50bc5c2e6068130
     build:
       context: ./dockerfiles
       dockerfile: php.dockerfile
@@ -106,30 +158,51 @@ services:
       - mysql
     entrypoint: ['php', '/var/www/html/artisan']
     networks:
+<<<<<<< HEAD
       - L10D_network
 
   cron:
     container_name: L10D-cron
+=======
+      - 11Aug_network
+
+  cron:
+    container_name: 11Aug-cron
+>>>>>>> 034ea41fb4f7f090b5ab1428a50bc5c2e6068130
     build:
       context: ./dockerfiles
       dockerfile: cron.dockefile
     volumes:
       - ./src:/var/www/html
     networks:
+<<<<<<< HEAD
       - L10D_network
 
   # python:
   #   container_name: L10D-python
+=======
+      - 11Aug_network
+
+  # python:
+  #   container_name: 11Aug-python
+>>>>>>> 034ea41fb4f7f090b5ab1428a50bc5c2e6068130
   #   build:
   #     context: ./dockerfiles
   #     dockerfile: python.dockerfile
   #   volumes:
   #     - ./src:/var/www/html
   #   networks:
+<<<<<<< HEAD
   #     - L10D_network
 
   phpmyadmin:
     container_name: L10D-phpmyadmin
+=======
+  #     - 11Aug_network
+
+  phpmyadmin:
+    container_name: 11Aug-phpmyadmin
+>>>>>>> 034ea41fb4f7f090b5ab1428a50bc5c2e6068130
     image: phpmyadmin
     depends_on:
       - mysql
@@ -138,7 +211,11 @@ services:
     ports:
       - 8081:80
     networks:
+<<<<<<< HEAD
       - L10D_network
+=======
+      - 11Aug_network
+>>>>>>> 034ea41fb4f7f090b5ab1428a50bc5c2e6068130
 
 volumes:
   db_data:
