@@ -1,11 +1,11 @@
 version: '3'
 
 networks:
-  l10_network:
+  L10D_network:
 
 services:
   app:
-    container_name: l10-app
+    container_name: L10D-app
     build:
       context: ./dockerfiles
       dockerfile: nginx.dockerfile
@@ -13,7 +13,7 @@ services:
         - UID=${UID:-1000}
         - GID=${GID:-1000}
     ports:
-      - "80:80"
+      - '80:80'
     volumes:
       - ./src:/var/www/html:delegated
     depends_on:
@@ -21,17 +21,17 @@ services:
       - artisan
       - mysql
     networks:
-      - l10_network
+      - L10D_network
 
   mysql:
-    container_name: l10-mysql
+    container_name: L10D-mysql
     image: mariadb:10.6
     restart: unless-stopped
     tty: true
     volumes:
-    - db_data:/var/lib/mysql
+      - db_data:/var/lib/mysql
     ports:
-      - "3306:3306"
+      - '3306:3306'
     environment:
       MYSQL_DATABASE: foundation
       MYSQL_USER: seldon
@@ -40,10 +40,10 @@ services:
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     networks:
-      - l10_network
+      - L10D_network
 
   php:
-    container_name: l10-php
+    container_name: L10D-php
     build:
       context: ./dockerfiles
       dockerfile: php.dockerfile
@@ -51,49 +51,49 @@ services:
         - UID=${UID:-1000}
         - GID=${GID:-1000}
     ports:
-      - "9000:9000"
+      - '9000:9000'
     volumes:
       - ./src:/var/www/html:delegated
     networks:
-      - l10_network
+      - L10D_network
 
   redis:
-    container_name: l10-redis
+    container_name: L10D-redis
     image: redis:alpine
     restart: unless-stopped
     ports:
-      - "6379:6379"
+      - '6379:6379'
     networks:
-      - l10_network
+      - L10D_network
 
   composer:
     image: composer:latest
-    container_name: l10-composer
+    container_name: L10D-composer
     volumes:
       - ./src:/var/www/html
     working_dir: /var/www/html
     depends_on:
       - app
-    entrypoint: [ 'composer', '--ignore-platform-reqs' ]
+    entrypoint: ['composer', '--ignore-platform-reqs']
     networks:
-      - l10_network
+      - L10D_network
 
   npm:
     image: node:current-alpine
-    container_name: l10-npm
+    container_name: L10D-npm
     volumes:
       - ./src:/var/www/html
     ports:
-      - "3000:3000"
-      - "3001:3001"
-      - "5173:5173"
+      - '3000:3000'
+      - '3001:3001'
+      - '5173:5173'
     working_dir: /var/www/html
-    entrypoint: [ 'npm' ]
+    entrypoint: ['npm']
     networks:
-      - l10_network
+      - L10D_network
 
   artisan:
-    container_name: l10-artisan
+    container_name: L10D-artisan
     build:
       context: ./dockerfiles
       dockerfile: php.dockerfile
@@ -104,22 +104,32 @@ services:
       - ./src:/var/www/html:delegated
     depends_on:
       - mysql
-    entrypoint: [ 'php', '/var/www/html/artisan' ]
+    entrypoint: ['php', '/var/www/html/artisan']
     networks:
-      - l10_network
+      - L10D_network
 
   cron:
-    container_name: l10-cron
+    container_name: L10D-cron
     build:
       context: ./dockerfiles
       dockerfile: cron.dockefile
     volumes:
       - ./src:/var/www/html
     networks:
-      - l10_network
+      - L10D_network
+
+  # python:
+  #   container_name: L10D-python
+  #   build:
+  #     context: ./dockerfiles
+  #     dockerfile: python.dockerfile
+  #   volumes:
+  #     - ./src:/var/www/html
+  #   networks:
+  #     - L10D_network
 
   phpmyadmin:
-    container_name: l10-phpmyadmin
+    container_name: L10D-phpmyadmin
     image: phpmyadmin
     depends_on:
       - mysql
@@ -128,7 +138,7 @@ services:
     ports:
       - 8081:80
     networks:
-      - l10_network
+      - L10D_network
 
 volumes:
   db_data:
